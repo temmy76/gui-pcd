@@ -29,6 +29,13 @@ def getRGBfromImage(filename):
 	
 	return r, g, b
 
+def brightness_add(image, value):
+    image = np.asarray(image).astype('uint16')
+    image = image+value
+    image = np.clip(image, 0, 255)
+    new_image = image.astype('uint8')
+    return new_image
+
 @app.route('/')
 def upload_form():
 	return render_template('extractRGB.html')
@@ -127,21 +134,8 @@ def brightnessImage(filename):
 	length = reso[0]
 	# get the value of brightness
 	brightness = int(request.form['brightness'])
-	# create numpy array for store the new value of brightness
-	new_r = []
-	new_g = []
-	new_b = []
-	# loop for change the brightness of image
-	for i in range(0, len(r)):
-		new_r.append(r[i] + brightness)
-		new_g.append(g[i] + brightness)
-		new_b.append(b[i] + brightness)
-	# create numpy array for store the new value of brightness
-	new_image = np.zeros((length, width, 3), np.uint8)
-	# loop for change the brightness of image
-	for i in range(0, length-1):
-		for j in range(0, width-1):
-			new_image[i,j] = [new_b[i], new_g[i], new_r[i]]
+	# change the brightness of image with the value of brightness using openCV
+	new_image = brightness_add(image, brightness)
 	new_filename = "brightness-" + filename
 	# save the image
 	cv.imwrite("static/uploads/{}".format(new_filename), new_image)
