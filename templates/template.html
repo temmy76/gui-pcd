@@ -35,12 +35,16 @@
 						>
 						<ul class="list-unstyled px-5 pt-1 pb-1">
 							<li>
-								<a href="#" class="text-decoration-none px-3 py-2 d-block"
+								<a
+									href="{{url_for('upload_form')}}"
+									class="text-decoration-none px-3 py-2 d-block"
 									>RGB</a
 								>
 							</li>
 							<li>
-								<a href="#" class="text-decoration-none px-3 py-2 d-block"
+								<a
+									href="{{url_for('grayscale')}}"
+									class="text-decoration-none px-3 py-2 d-block"
 									>Grayscale</a
 								>
 							</li>
@@ -50,6 +54,22 @@
 						<a href="#" class="text-decoration-none px-3 py-2 d-block"
 							>Week 2</a
 						>
+						<ul class="list-unstyled px-5 pt-1 pb-1">
+							<li>
+								<a
+									href="{{url_for('brightness')}}"
+									class="text-decoration-none px-3 py-2 d-block"
+									>Brightness</a
+								>
+							</li>
+							<li>
+								<a
+									href="{{url_for('bitwise')}}"
+									class="text-decoration-none px-3 py-2 d-block"
+									>Bitwise</a
+								>
+							</li>
+						</ul>
 					</li>
 					<li class="">
 						<a href="#" class="text-decoration-none px-3 py-2 d-block"
@@ -69,124 +89,9 @@
 				</ul>
 			</div>
 			<div class="content">
-				<h1 class="text-center bg-black text-white">Extract RGB from Image</h1>
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-md-6">
-							<form action="/" method="POST" enctype="multipart/form-data">
-								<label for="file">Upload Image</label>
-								<br />
-								<div class="form-group d-grid">
-									<input
-										type="file"
-										name="file"
-										id="file"
-										class="form-control"
-									/>
-									<button type="submit" class="btn btn-primary">Upload</button>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="row justify-content-center">
-						<div class="col-md-6">
-							<div class="row py-4">
-								<div class="col-md-6 px-5">
-									<span class="d-flex justify-content-center">Before</span>
-									<div class="image-space">
-										{% if filename %}
-										<img
-											src="{{ url_for('display_image', filename=filename) }}"
-											alt="image"
-											class="img-fluid"
-										/>
-										{% endif %}
-									</div>
-								</div>
-								<div class="col-md-6 px-5">
-									<span class="d-flex justify-content-center">After</span>
-									<div class="image-space">
-										{% if filename %}
-										<img
-											src="{{ url_for('display_image', filename=filename) }}"
-											alt="image"
-											class="img-fluid"
-										/>
-										{% endif %}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<form action="/get_rgb/{{ filename }}" method="post">
-						<input
-							class="btn btn-primary text-white"
-							type="submit"
-							value="Get RGB value"
-						/>
-					</form>
-					<div class="d-flex scrollable-table">
-						<table class="table table-striped table-hover table-responsive">
-							<thead>
-								<tr>
-									<th>Red</th>
-								</tr>
-							</thead>
-							<tbody class="table-group-divider">
-								{% if red %}
-								<!--  -->
-								{% for r in red %}
-								<tr>
-									<td>{{ r }}</td>
-								</tr>
-								{% endfor %}
-								<!--  -->
-
-								{% endif %}
-							</tbody>
-						</table>
-						<table class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>Green</th>
-								</tr>
-							</thead>
-							<tbody class="table-group-divider">
-								{% if green %}
-								<!--  -->
-								{% for g in green %}
-								<tr>
-									<td>{{ g }}</td>
-								</tr>
-								{% endfor %}
-								<!--  -->
-
-								{% endif %}
-							</tbody>
-						</table>
-						<table class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>Blue</th>
-								</tr>
-							</thead>
-							<tbody class="table-group-divider">
-								{% if blue %}
-								<!--  -->
-								{% for b in blue %}
-								<tr>
-									<td>{{ b }}</td>
-								</tr>
-								{% endfor %}
-								<!--  -->
-
-								{% endif %}
-							</tbody>
-						</table>
-					</div>
-				</div>
+				{% block content %}
+				<!--  -->
+				{% endblock %}
 			</div>
 		</div>
 	</body>

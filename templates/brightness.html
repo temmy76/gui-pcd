@@ -1,0 +1,75 @@
+{% extends "template.html" %}
+<!--  -->
+{% block content %}
+<!-- make form for taking value for add brightness to the image and display the image -->
+<h1 class="text-center bg-black text-white">Add Brightness to Image</h1>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<form action="/brightness" method="POST" enctype="multipart/form-data">
+				<label for="file">Upload Image</label>
+				<br />
+				<div class="form-group d-grid">
+					<input type="file" name="file" id="file" class="form-control" />
+					<button type="submit" class="btn btn-primary">Upload</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="row py-4">
+				<div class="col-md-6 px-5">
+					<span class="d-flex justify-content-center">Before</span>
+					<div class="image-space">
+						{% if filename %}
+						<img
+							src="{{ url_for('display_brightness_image', filename=filename) }}"
+							alt="image"
+							class="img-fluid"
+						/>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-6 px-5">
+					<span class="d-flex justify-content-center">After</span>
+					<div class="image-space">
+						{% if brightness %}
+						<img
+							src="{{ url_for('display_brightness_image', filename=brightness) }}"
+							alt="image"
+							class="img-fluid"
+						/>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- make form for choosing some integer to add the brightness -->
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<form
+				action="/brightness/{{ filename }}"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<label for="file">Add Brightness</label>
+				<br />
+				<div class="form-group d-grid">
+					<input
+						type="number"
+						name="brightness"
+						id="brightness"
+						class="form-control"
+						placeholder="Enter brightness"
+					/>
+					<button type="submit" class="btn btn-primary">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
