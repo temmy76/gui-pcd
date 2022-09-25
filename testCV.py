@@ -1,6 +1,3 @@
-from ast import For
-from operator import length_hint
-from turtle import width
 import cv2 as cv
 
 image = cv.imread("static/uploads/foto.jpg",1)
@@ -8,17 +5,9 @@ image = cv.imread("static/uploads/foto.jpg",1)
 # cv.waitKey(0)
 # cv.destroyAllWindows()
 
-reso = image.shape 
-
-
-width = reso[1]
-length = reso[0]
-rgb = []
-for i in range(length-1):
-    for j in range(width-1):
-        rgb.append(image[i,j])
-RGB2 = []
-for i in range(len(rgb)):
-    RGB2[i] = rgb[i]
-
-print(RGB2)
+print(b)
+# reso = image.shape 
+# for i in range(0, reso[0]):
+#     for j in range(0, reso[1]):
+#         B, G, R = image[i, j]
+#         print("R: ", R, "G: ", G, "B: ", B)

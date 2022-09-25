@@ -15,18 +15,7 @@
 	</head>
 	<body class="">
 		<h2 class="text-center bg-info">Select a file to upload</h2>
-		<!-- <p>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    </p> -->
-		<div class="container">
+	<div class="container">
 			<div class="row">
 				<form
 					class="col-sm-8 d-flex align-self-center"
@@ -124,6 +113,20 @@
 					</tbody>
 				</table>
 			</div>
+			<!-- make image grayscale and show the image -->
+			<form action="/grayscale/{{ filename }}" method="post">
+				<input
+					class="btn btn-info text-white"
+					type="submit"
+					value="Make Grayscale"
+				/>
+			</form>
+			{% if grayscale %}
+			<img
+				width="200"
+				src="{{ url_for('display_image', filename=filename) }}"
+			/>
+			{% endif %}
 		</div>
 	</body>
 </html>
