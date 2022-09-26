@@ -1,6 +1,115 @@
 {% extends "template.html" %}
 <!--  -->
 {% block content %}
-<h1>this is bitwise</h1>
-<h2>Still in construction</h2>
+<!-- make form to upload 2 image with bootstrap-->
+<div class="container">
+	<div class="row">
+		<h1 class="text-center bg-black text-white">Bitwise Image</h1>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<form
+				action="{{url_for('bitwise')}}"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<div class="form-group d-grid justify-content-center mx-3">
+					<label for="image1">Image 1</label>
+					<input
+						type="file"
+						class="form-control mb-4"
+						id="image1"
+						name="image1"
+					/>
+					<label for="image2">Image 2</label>
+					<input
+						type="file"
+						class="form-control mb-4"
+						id="image2"
+						name="image2"
+					/>
+					<button type="submit" class="btn btn-primary">Upload</button>
+				</div>
+			</form>
+
+			<form
+				action="/bitwise/{{ image1 }}/{{ image2 }}"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<!-- make option between manual or opencv -->
+				<label for="operation">Method</label>
+				<select
+					class="form-select mb-4"
+					aria-label="Default select example"
+					name="operation"
+				>
+					<option selected>-- Choose Method --</option>
+					<option value="opencv">OpenCV</option>
+					<option value="manual">Manual</option>
+				</select>
+
+				<label for="bitwise">Bitwise</label>
+				<select class="form-control" id="bitwise" name="bitwise">
+					<option value="">-- Choose Bitwise --</option>
+					<option value="and">AND</option>
+					<option value="or">OR</option>
+					<option value="xor">XOR</option>
+					<option value="not">NOT</option>
+				</select>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="row py-4">
+				<div class="col-md-6 px-5">
+					<h3 class="d-flex justify-content-center">Image 1</h3>
+					<div class="image-space d-flex justify-content-center">
+						{% if image1 %}
+						<img
+							src="{{ url_for('display_bitwise_image', filename=image1) }}"
+							alt="image"
+							class="img-fluid"
+							style="width: 200px"
+						/>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-6 px-5">
+					<h3 class="d-flex justify-content-center">Image 2</h3>
+					<div class="image-space d-flex justify-content-center">
+						{% if image2 %}
+						<img
+							src="{{ url_for('display_bitwise_image', filename=image2) }}"
+							alt="image"
+							class="img-fluid"
+							style="width: 200px"
+						/>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="row py-4">
+				<div class="d-grid justify-content-center px-5">
+					<h3 class="d-flex justify-content-center">Result</h3>
+					<div class="image-space">
+						{% if result %}
+						<img
+							src="{{ url_for('display_bitwise_image', filename=result) }}"
+							alt="image"
+							class="img-fluid"
+						/>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

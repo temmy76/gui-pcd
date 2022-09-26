@@ -2,7 +2,7 @@
 <!--  -->
 {% block content %}
 <!-- make form for taking value for add brightness to the image and display the image -->
-<h1 class="text-center bg-black text-white">Add Brightness to Image</h1>
+<h1 class="text-center bg-black text-white">Change the Brightness</h1>
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-6">
@@ -56,17 +56,32 @@
 				method="POST"
 				enctype="multipart/form-data"
 			>
-				<label for="file">Add Brightness</label>
 				<br />
+
 				<div class="form-group d-grid">
+					<label for="operation">Operation</label>
+					<select name="operation" id="operation" class="form-control">
+						<option value="">-- Choose Operation --</option>
+						<option value="add">Add</option>
+						<option value="substract">Substract</option>
+						<option value="multiply">Multiply</option>
+						<option value="divide">Divide</option>
+					</select>
+					<label for="method">Method</label>
+					<select name="method" id="method" class="form-control">
+						<option value="">-- Choose Method --</option>
+						<option value="manual">Manual</option>
+						<option value="opencv">OpenCV</option>
+					</select>
+					<label for="file">Change Brightness</label>
 					<input
 						type="number"
 						name="brightness"
 						id="brightness"
 						class="form-control"
-						placeholder="Enter brightness"
+						placeholder="Enter Value"
 					/>
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</form>
 		</div>
