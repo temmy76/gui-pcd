@@ -42,7 +42,7 @@ def brightness_addcv(image, value):
     return new_image
 
 def brightness_subtraction(image, value):
-	image = image.astype('uint16')
+	image = image.astype('int64')
 	image = image-value
 	image = np.clip(image, 0, 255)
 	new_image = image.astype('uint8')

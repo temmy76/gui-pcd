@@ -134,3 +134,4 @@ include/
 share/
 pyvenv.cfg
 lib64
+static/uploads/*
